@@ -1,0 +1,128 @@
+.hf-figure {
+  width: 100%;
+  height: 100%;
+  max-height: 340px;
+  overflow: visible;
+}
+
+.hf-aura { animation: hf-aura-pulse 6s ease-in-out infinite; transform-box: fill-box; transform-origin: 50% 50%; }
+@keyframes hf-aura-pulse {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.05); }
+}
+
+/* Pivots */
+.hf-root  { transform-box: fill-box; transform-origin: 50% 100%; }
+.hf-head  { transform-box: fill-box; transform-origin: 50% 100%; }
+.hf-torso { transform-box: fill-box; transform-origin: 50% 100%; }
+.hf-chest { transform-box: fill-box; transform-origin: 50% 50%; animation: hf-breathe-idle 5s ease-in-out infinite; }
+.hf-arm-l, .hf-arm-r { transform-box: fill-box; transform-origin: 50% 4%; }
+.hf-leg-l, .hf-leg-r { transform-box: fill-box; transform-origin: 50% 2%; }
+.hf-arm, .hf-leg, .hf-head, .hf-torso, .hf-root { transition: transform 0.5s ease; }
+
+@keyframes hf-breathe-idle { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.06); } }
+
+/* Idle sway for calm/seated poses */
+.pose-sitCalm .hf-root,
+.pose-standCalm .hf-root { animation: hf-idle 6s ease-in-out infinite; }
+@keyframes hf-idle { 0%, 100% { transform: rotate(-0.6deg); } 50% { transform: rotate(0.6deg); } }
+
+/* Neck roll */
+.pose-neckRoll .hf-head { animation: hf-neck 5s ease-in-out infinite; }
+@keyframes hf-neck {
+  0%, 100% { transform: rotate(-16deg); }
+  25% { transform: rotate(0deg) translateY(-2px); }
+  50% { transform: rotate(16deg); }
+  75% { transform: rotate(0deg) translateY(-2px); }
+}
+
+/* Shoulder roll — arms make small circles, head bobs */
+.pose-shoulderRoll .hf-arm-l { animation: hf-shoulder 3.5s ease-in-out infinite; }
+.pose-shoulderRoll .hf-arm-r { animation: hf-shoulder 3.5s ease-in-out infinite; }
+@keyframes hf-shoulder {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-6px) rotate(3deg); }
+  50% { transform: translateY(0) rotate(0deg); }
+  75% { transform: translateY(4px) rotate(-3deg); }
+}
+
+/* Reach up — both arms swing overhead and gently sway */
+.pose-reachUp .hf-arm-l { animation: hf-reach-l 4s ease-in-out infinite; }
+.pose-reachUp .hf-arm-r { animation: hf-reach-r 4s ease-in-out infinite; }
+@keyframes hf-reach-l { 0%,100% { transform: rotate(168deg); } 50% { transform: rotate(176deg); } }
+@keyframes hf-reach-r { 0%,100% { transform: rotate(-168deg); } 50% { transform: rotate(-176deg); } }
+
+/* Side stretch — torso bends, one arm overhead, alternating sides */
+.pose-sideStretch .hf-torso { animation: hf-sidebend 6s ease-in-out infinite; }
+.pose-sideStretch .hf-arm-r { animation: hf-reach-r 6s ease-in-out infinite; }
+.pose-sideStretch .hf-arm-l { animation: hf-reach-l 6s ease-in-out infinite; }
+@keyframes hf-sidebend {
+  0%, 100% { transform: rotate(-10deg); }
+  50% { transform: rotate(10deg); }
+}
+
+/* Forward fold — torso folds, head & arms drop */
+.pose-forwardFold .hf-torso { animation: hf-fold-torso 5s ease-in-out infinite; }
+.pose-forwardFold .hf-head { animation: hf-fold-head 5s ease-in-out infinite; }
+.pose-forwardFold .hf-arm-l,
+.pose-forwardFold .hf-arm-r { animation: hf-fold-arm 5s ease-in-out infinite; }
+@keyframes hf-fold-torso { 0%,100% { transform: scaleY(1); } 50% { transform: scaleY(0.78) translateY(8px); } }
+@keyframes hf-fold-head { 0%,100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(28px) rotate(8deg); } }
+@keyframes hf-fold-arm { 0%,100% { transform: rotate(0); } 50% { transform: translateY(20px) rotate(8deg); } }
+
+/* Cat-cow — torso arches back and forth, chest opens */
+.pose-catCow .hf-torso { animation: hf-catcow 5s ease-in-out infinite; }
+@keyframes hf-catcow {
+  0%, 100% { transform: rotate(-6deg) scaleY(1.02); }
+  50% { transform: rotate(6deg) scaleY(0.96); }
+}
+
+/* Shake it out — quick jitter through arms and body */
+.pose-shakeOut .hf-root { animation: hf-shake-root 0.5s linear infinite; }
+.pose-shakeOut .hf-arm-l { animation: hf-shake-arm 0.32s linear infinite; }
+.pose-shakeOut .hf-arm-r { animation: hf-shake-arm 0.32s linear infinite reverse; }
+@keyframes hf-shake-root {
+  0%,100% { transform: translateX(-2px) rotate(-1deg); }
+  50% { transform: translateX(2px) rotate(1deg); }
+}
+@keyframes hf-shake-arm {
+  0%,100% { transform: rotate(-10deg); }
+  50% { transform: rotate(10deg); }
+}
+
+/* Butterfly hug — arms crossed on shoulders, alternating taps */
+.pose-butterflyHug .hf-arm-l { animation: hf-bfly-l 1.6s ease-in-out infinite; }
+.pose-butterflyHug .hf-arm-r { animation: hf-bfly-r 1.6s ease-in-out infinite; }
+@keyframes hf-bfly-l {
+  0%, 100% { transform: rotate(58deg) translateY(2px); }
+  50% { transform: rotate(58deg) translateY(-4px); }
+}
+@keyframes hf-bfly-r {
+  0%, 50% { transform: rotate(-58deg) translateY(-4px); }
+  25%, 75%, 100% { transform: rotate(-58deg) translateY(2px); }
+}
+
+/* Hand on heart — one arm folded to the chest, calm */
+.pose-handOnHeart .hf-arm-r { transform: rotate(-72deg) translateY(2px); }
+.pose-handOnHeart .hf-root { animation: hf-idle 6s ease-in-out infinite; }
+
+/* Sway — gentle side to side */
+.pose-sway .hf-root { animation: hf-sway 3.5s ease-in-out infinite; }
+@keyframes hf-sway {
+  0%, 100% { transform: translateX(-9px) rotate(-2deg); }
+  50% { transform: translateX(9px) rotate(2deg); }
+}
+
+/* Walk in place — legs alternate, arms counter-swing, body bobs */
+.pose-walk .hf-root { animation: hf-walk-bob 0.9s ease-in-out infinite; }
+.pose-walk .hf-leg-l { animation: hf-walk-leg 0.9s ease-in-out infinite; }
+.pose-walk .hf-leg-r { animation: hf-walk-leg 0.9s ease-in-out infinite reverse; }
+.pose-walk .hf-arm-l { animation: hf-walk-arm 0.9s ease-in-out infinite reverse; }
+.pose-walk .hf-arm-r { animation: hf-walk-arm 0.9s ease-in-out infinite; }
+@keyframes hf-walk-bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+@keyframes hf-walk-leg { 0%,100% { transform: rotate(-18deg); } 50% { transform: rotate(18deg); } }
+@keyframes hf-walk-arm { 0%,100% { transform: rotate(14deg); } 50% { transform: rotate(-14deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .hf-figure * { animation-duration: 8s !important; }
+}
